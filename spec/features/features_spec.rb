@@ -8,23 +8,23 @@ feature "players can enter names" do
   end
 
   scenario "player 2 enters their name and can see it" do
-    visit("/")
-    page.fill_in 'player_1_name', with: 'Player-1-Name'
-    page.fill_in 'player_2_name', with: 'Player-2-Name'
-    click_button 'Submit'
+    sign_in_and_play
     expect(page).to have_content("Player-2-Name")
   end
 end
 
 feature "players can see each other's hit points" do
   scenario "player 1 can see player 2's hitpoints" do
-    visit("/")
-    page.fill_in 'player_1_name', with: 'Player-1-Name'
-    page.fill_in 'player_2_name', with: 'Player-2-Name'
-    click_button 'Submit'
+    sign_in_and_play
     expect(page).to have_content("Player 2: 100HP")
   end
+end
 
-
+feature "players can see each other's hit points" do
+  scenario "player 1 can see player 2's hitpoints" do
+    sign_in_and_play
+    click_button 'Attack'
+    expect(page).to have_content("You attacked player 2! Why?")
+  end
 end
 
